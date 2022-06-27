@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -13,6 +14,8 @@ func StartServer() {
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Hello, world!"))
 	})
+
+	fmt.Println("Starting server on port 3333 🚀")
 
 	http.ListenAndServe(":3333", r)
 }
