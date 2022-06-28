@@ -4,16 +4,14 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/BernardoDeveloper/powf/src/routes"
 	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
 )
 
 func StartServer() {
+	apiRouter := routes.StartRouter()
 	r := chi.NewRouter()
-	r.Use(middleware.Logger)
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello, world!"))
-	})
+	r.Mount("/api", apiRouter)
 
 	fmt.Println("Starting server on port 3333 🚀")
 
