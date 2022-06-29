@@ -8,7 +8,7 @@
 <p>Create a server, which is capable of receiving files from the user, and save these files in an encrypted and compressed form in a selected path.</p>
 
 ## Todo 🖊️
-- [ ] select PATH to save data.
+- [x] get user PATH to save data.
 - [ ] receiving user data.
 - [ ] compact the data.
 - [ ] create the cryptography integration.

@@ -3,39 +3,24 @@ package getpath
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 )
 
-// type p struct {
-// 	Path string `json:"path"`
-// }
-
 var p PathModel
 
-func Serialize(data interface{}) (string, error) {
-	val, err := json.MarshalIndent(data, "", "    ")
-	if err != nil {
-		return "", err
-	}
-
-	fmt.Print(string(val))
-	return string(val), nil
-}
-
 func Path(w http.ResponseWriter, r *http.Request) {
-	if r.Body == nil || r.ContentLength == 0 {
-		panic("Request body is empty")
+	reqBody, err := ioutil.ReadAll(r.Body)
+	json.Unmarshal(reqBody, &p)
+	if err != nil {
+		fmt.Println(err)
+		return
 	}
 
-	value := json.NewDecoder(r.Body).Decode(&p)
-	result, _ := Serialize(value)
+	json.NewEncoder(w).Encode(p)
 
-	// path := json.NewDecoder(r.Body).Decode(&p{})
-	// if path == nil {
-	// 	w.WriteHeader(http.StatusBadRequest)
-	// 	return
-	// }
+	newData, err := json.Marshal(p)
+	fmt.Println(string(newData))
 
-	fmt.Print(result)
-	// os.Setenv("PATH", path)
+	err = ioutil.WriteFile("path.json", newData, 0644)
 }
