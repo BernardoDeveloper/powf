@@ -9,6 +9,7 @@
 
 ## Todo 🖊️
 - [x] get user PATH to save data.
+- [x] create folder if not exists.
 - [ ] receiving user data.
 - [ ] compact the data.
 - [ ] create the cryptography integration.
