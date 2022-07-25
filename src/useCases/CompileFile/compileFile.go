@@ -1,0 +1,3 @@
+package compilefile
+
+func compile() {}

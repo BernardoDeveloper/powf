@@ -20,10 +20,10 @@ func Path(w http.ResponseWriter, r *http.Request) {
 
 	json.NewEncoder(w).Encode(p)
 
-	newData, err := json.Marshal(p)
+	newData, _ := json.Marshal(p)
 	fmt.Println(string(newData))
 
-	err = ioutil.WriteFile("path.json", newData, 0644)
+	ioutil.WriteFile("path.json", newData, 0644)
 
 	CreateFolder(p.Path)
 }
