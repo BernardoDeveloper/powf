@@ -1,14 +1,19 @@
 package userfile
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
+
+	getpath "github.com/BernardoDeveloper/powf/src/useCases/GetPath"
 )
 
 func GetFile(w http.ResponseWriter, r *http.Request) {
+	r.ParseMultipartForm(10 << 20)
+
 	file, handler, err := r.FormFile("file")
 	if err != nil {
 		fmt.Println("Error retrieving the file")
@@ -16,7 +21,14 @@ func GetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	f, err := os.OpenFile(handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+	// Getpath for save file
+	// TODO: change string to a automatic code
+	content, _ := ioutil.ReadFile("/home/bernardo/Programacao/powf/path.json")
+	var p getpath.PathModel
+	json.Unmarshal(content, &p)
+	path := p.Path
+
+	f, err := os.OpenFile(path+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
 	if err != nil {
 		panic(err)
 	}
@@ -29,7 +41,7 @@ func GetFile(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("MIME Header: %+v\n", handler.Header)
 
 	// Create temp file
-	tempFile, err := ioutil.TempFile("temp-images", "upload-*.png")
+	tempFile, err := ioutil.TempFile("file", "upload-*.png")
 	if err != nil {
 		fmt.Println(err)
 	}

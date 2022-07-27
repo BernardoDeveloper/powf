@@ -10,7 +10,8 @@
 ## Todo 🖊️
 - [x] get user PATH to save data.
 - [x] create folder if not exists.
-- [ ] receiving user data.
+- [x] receiving user data.
+- [ ] change string to a automatic code.
 - [ ] compact the data.
 - [ ] create the cryptography integration.
 - [ ] save final data on selected path.
