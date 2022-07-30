@@ -11,7 +11,7 @@
 - [x] get user PATH to save data.
 - [x] create folder if not exists.
 - [x] receiving user data.
-- [ ] change string to a automatic code.
-- [ ] compact the data.
-- [ ] create the cryptography integration.
-- [ ] save final data on selected path.
+- [ ] change string to a automatic path.
+- [ ] create the cryptography function in Clang.
+- [ ] compress file before save.
+- [x] save final data on selected path.

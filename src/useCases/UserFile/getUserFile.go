@@ -21,8 +21,11 @@ func GetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// TODO: Compress file in Clang
+	// TODO: File enctyption
+
 	// Getpath for save file
-	// TODO: change string to a automatic code
+	// TODO: change string to a automatic path
 	content, _ := ioutil.ReadFile("/home/bernardo/Programacao/powf/path.json")
 	var p getpath.PathModel
 	json.Unmarshal(content, &p)

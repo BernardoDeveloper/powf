@@ -1,3 +1,0 @@
-package compilefile
-
-func compile() {}
