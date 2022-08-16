@@ -12,6 +12,6 @@
 - [x] create folder if not exists.
 - [x] receiving user data.
 - [ ] change string to a automatic path.
-- [ ] create the cryptography function in Clang.
+- [ ] create the cryptography function in golang.
 - [ ] compress file before save.
 - [x] save final data on selected path.
