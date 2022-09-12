@@ -1,13 +1,27 @@
-// I know what go have gzip package but I try create my function.
-// I don't have idea how I make this kkk :)
 package compressfile
 
-import "io"
+import (
+	"bufio"
+	"compress/gzip"
+	"io/ioutil"
+	"os"
+	"strings"
 
-type writer struct {
-	w io.Writer
-}
+	userfile "github.com/BernardoDeveloper/powf/src/useCases/UserFile"
+)
 
-func compressfile() *writer {
-	
+func CompressFileMethod() {
+	var extension_file string
+	_, handler := userfile.GetFile()
+
+	f, _ := os.Open(handler.Filename)
+	read := bufio.NewReader(f)
+	data, _ := ioutil.ReadAll(read)
+
+	handler.Filename = strings.Replace(handler.Filename, extension_file, ".gz", -1)
+	f, _ = os.Create(handler.Filename)
+
+	w := gzip.NewWriter(f)
+	w.Write(data)
+	w.Close()
 }
