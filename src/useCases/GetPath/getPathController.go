@@ -23,12 +23,17 @@ func Path(w http.ResponseWriter, r *http.Request) {
 	newData, _ := json.Marshal(p)
 	fmt.Println(string(newData))
 
-	ioutil.WriteFile("path.json", newData, 0644)
-
 	CreateFolder(p.Path)
+
+	ioutil.WriteFile("path.json", newData, 0644)
 }
 
 func CreateFolder(path string) {
+	if path == "" {
+		fmt.Println("Can't path null")
+		return
+	}
+
 	err := os.Mkdir(path, os.ModePerm)
 	if err != nil && os.IsExist(err) {
 		fmt.Println(err)
