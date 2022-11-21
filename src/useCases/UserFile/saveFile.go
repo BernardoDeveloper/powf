@@ -5,16 +5,22 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"net/http"
 	"os"
 
 	getpath "github.com/BernardoDeveloper/powf/src/useCases/GetPath"
 )
 
-func SaveFile() {
-	file, handler := GetFile()
+func SaveFile(w http.ResponseWriter, r *http.Request) {
+	//file, handler := GetFile()
+	file, handler, err := r.FormFile("file")
+	if err != nil {
+		fmt.Println("Error retrieving the file.")
+		panic(err)
+	}
 
 	// TODO: create automatized path
-	content, _ := ioutil.ReadFile("C:/Users/berna/Programacao/powf/path.json")
+	content, _ := ioutil.ReadFile("/home/bernardo/programacao/powf/path.json")
 	var p getpath.PathModel
 	json.Unmarshal(content, &p)
 	path := p.Path

@@ -9,8 +9,12 @@
 </head>
 
 <body>
+  <form action="http://localhost:3333/api/path">
+    <input type="text" name="path" value="path" />
+    <input type="submit" value="upload">
+  </form>
   <form enctype="multipart/form-data" action="http://localhost:3333/api/upload" method="post">
-    <input type="file" name="file" />
+    <input type="file" name="file" id="file" />
     <input type="submit" value="upload" />
   </form>
 </body>

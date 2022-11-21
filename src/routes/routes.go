@@ -10,7 +10,7 @@ func StartRouter() *chi.Mux {
 	ApiRouter := chi.NewRouter()
 
 	ApiRouter.Post("/path", getpath.Path)
-	ApiRouter.Post("/upload", userfile.UploadFile)
+	ApiRouter.Post("/upload", userfile.SaveFile)
 
 	return ApiRouter
 }
