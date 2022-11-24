@@ -5,23 +5,27 @@ import (
 	"compress/gzip"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strings"
 
-	userfile "github.com/BernardoDeveloper/powf/src/useCases/UserFile"
+	"github.com/BernardoDeveloper/powf/src/utils"
 )
 
-func CompressFileMethod() {
-	var extension_file string
-	_, handler := userfile.GetFile()
+func CompressFileMethod(path string, fileName string) {
+	file, err := os.Open(path + fileName)
+	utils.HttpErr("Can't open the file.", err)
 
-	f, _ := os.Open(handler.Filename)
-	read := bufio.NewReader(f)
-	data, _ := ioutil.ReadAll(read)
+	read := bufio.NewReader(file)
+	data, err := ioutil.ReadAll(read)
+	utils.HttpErr("Error to read file.", err)
 
-	handler.Filename = strings.Replace(handler.Filename, extension_file, ".gz", -1)
-	f, _ = os.Create(handler.Filename)
+	extension := filepath.Ext(path)
+	compressFileName := strings.Replace(path, extension, ".gz", -1)
 
-	w := gzip.NewWriter(f)
-	w.Write(data)
-	w.Close()
+	file, err = os.Create(path + compressFileName)
+	utils.HttpErr("Error to compress file.", err)
+
+	writer := gzip.NewWriter(file)
+	writer.Write(data)
+	writer.Close()
 }
